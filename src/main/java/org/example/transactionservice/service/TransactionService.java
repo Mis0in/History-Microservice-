@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import static org.example.transactionservice.repository.specs.TransactionSpecs.byCustomerId;
 import static org.example.transactionservice.repository.specs.TransactionSpecs.dateBetween;
 
 
@@ -25,8 +26,12 @@ public class TransactionService {
 
     @Transactional
     public TransactionResponse getTransactions(TransactionRequest request) {
+        var start = request.getStartDate();
+        var end = request.getEndDate();
+
         Page<Transaction> page = repository.findAll(
-                dateBetween(request.getStartDate(), request.getEndDate()),
+                dateBetween(start, end)
+                        .and(byCustomerId(request.getCustomerId())),
                 PageRequest.of(request.getPage(), request.getSize()));
 
         return new TransactionResponse(

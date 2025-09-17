@@ -24,4 +24,17 @@ public class TransactionSpecs {
         return (root, query, builder) ->
                 builder.between(root.get("dateTime"), finalStartDate, finalEndDate);
     }
+
+    public static Specification<Transaction> dateAfter(LocalDateTime date) {
+        return dateBetween(date, null);
+    }
+
+    public static Specification<Transaction> dateBefore(LocalDateTime date) {
+        return dateBetween(null, date);
+    }
+
+    public static Specification<Transaction> byCustomerId(String customerId) {
+        return (root, query,  builder) ->
+                builder.equal(root.get("customerId"), customerId);
+    }
 }

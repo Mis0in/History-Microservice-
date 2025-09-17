@@ -2,7 +2,6 @@ package org.example.transactionservice.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.example.transactionservice.model.dto.TransactionDto;
 import org.example.transactionservice.model.dto.TransactionRequest;
 import org.example.transactionservice.model.dto.TransactionResponse;
 import org.example.transactionservice.model.entity.Transaction;
@@ -26,28 +25,15 @@ public class TransactionService {
 
     @Transactional
     public TransactionResponse getTransactions(TransactionRequest request) {
-        Page<Transaction> page = repository.findAll(dateBetween(
-                request.getStartDate(),
-                request.getEndDate()),
+        Page<Transaction> page = repository.findAll(
+                dateBetween(request.getStartDate(), request.getEndDate()),
                 PageRequest.of(request.getPage(), request.getSize()));
 
-        return TransactionResponse.builder()
-                .transactions(page.map(this::toDto).getContent())
-                .currentPage(page.getNumber())
-                .totalPages(page.getTotalPages())
-                .totalItems(page.getTotalElements())
-                .build();
-    }
-
-    public TransactionDto toDto(Transaction t) {
-        return TransactionDto.builder()
-                .transactionId(t.getTransactionId())
-                .customerId(t.getCustomerId())
-                .accountId(t.getAccountId())
-                .amount(t.getAmount())
-                .dateTime(t.getDateTime())
-                .type(t.getType().name())
-                .build();
+        return new TransactionResponse(
+                page.getContent(),
+                page.getNumber(),
+                page.getTotalPages(),
+                page.getTotalElements());
     }
 
 

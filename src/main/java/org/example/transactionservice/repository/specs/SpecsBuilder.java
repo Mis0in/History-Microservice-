@@ -26,7 +26,8 @@ public class SpecsBuilder {
         return Stream.of(
                 buildSpec(req::getStartDate, TransactionSpecs::dateAfter),
                 buildSpec(req::getEndDate, TransactionSpecs::dateBefore),
-                buildSpec(req::getCustomerId, TransactionSpecs::byCustomerId)
+                buildSpec(req::getCustomerId, TransactionSpecs::byCustomerId),
+                buildSpec(req::getAccountId, TransactionSpecs::byAccountId)
                 ).filter(Objects::nonNull).reduce(Specification::and).orElse(idempotentSpec);
     }
 }

@@ -29,6 +29,7 @@ public class TransactionController {
         request.setStartDate(startDate);
         request.setEndDate(endDate);
         request.setCustomerId(customerId);
+        request.setAccountId(accountId);
         request.setPage(page);
         request.setSize(size);
 

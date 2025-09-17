@@ -27,7 +27,7 @@ public class TransactionSpecs {
     }
 
     public static Specification<Transaction> byAccountId(String accountId) {
-        Objects.requireNonNull(accountId, "customerName must not be null");
+        Objects.requireNonNull(accountId, "accountId must not be null");
         return (root, query,  builder) ->
                 builder.equal(root.get("accountId"), accountId);
     }

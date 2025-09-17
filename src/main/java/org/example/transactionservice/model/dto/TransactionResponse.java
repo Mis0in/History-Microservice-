@@ -33,7 +33,7 @@ public class TransactionResponse {
      */
     public TransactionResponse(Page<Transaction> page) {
         this.transactions = page.getContent();
-        this.currentPage = page.getNumber() + 1;
+        this.currentPage = page.getNumber();
         this.totalPages = page.getTotalPages();
         this.totalItems = page.getTotalElements();
     }

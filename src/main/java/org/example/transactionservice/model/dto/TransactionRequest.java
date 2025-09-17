@@ -8,6 +8,7 @@ public class TransactionRequest {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private String customerId;
+    private String accountId;
     private int page = 0;
     private int size = 20;
 }

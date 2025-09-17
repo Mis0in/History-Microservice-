@@ -30,6 +30,5 @@ public class Transaction {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 7)
     private TransactionType type;
-
 }
 

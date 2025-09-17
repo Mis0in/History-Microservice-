@@ -16,6 +16,7 @@
 
 **Параметры:**
 - `startDate`, `endDate` - фильтр по дате
+- `customerId`, `accountId` - по id
 - `page`, `size` - пагинация
 
 ## Запуск

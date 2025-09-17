@@ -10,6 +10,8 @@ import org.example.transactionservice.repository.specs.SpecsBuilder;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 
@@ -23,9 +25,10 @@ public class TransactionService {
     @Transactional
     public TransactionResponse getTransactions(TransactionRequest request) {
         var specification = SpecsBuilder.buildSpecifications(request);
+        Pageable pageable =  PageRequest.of(request.getPage(), request.getSize(),
+                Sort.by("dateTime").descending());
 
-        return new TransactionResponse(repository.findAll(specification,
-                PageRequest.of(request.getPage(), request.getSize())));
+        return new TransactionResponse(repository.findAll(specification, pageable));
     }
 
 

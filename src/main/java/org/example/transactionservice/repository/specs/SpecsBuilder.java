@@ -10,7 +10,7 @@ import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 public class SpecsBuilder {
-    private final static Specification<Transaction> idempotentSpec =
+    public final static Specification<Transaction> idempotentSpec =
             (r,q,b) -> b.conjunction();
 
     private static <T> Specification<Transaction> buildSpec(Supplier<T> getter, Function<T, Specification<Transaction>> specMethod) {

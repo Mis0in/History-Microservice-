@@ -15,7 +15,6 @@
 **GET /api/transactions**
 
 **Параметры:**
-- `customerId` - фильтр по ID клиента
 - `startDate`, `endDate` - фильтр по дате
 - `page`, `size` - пагинация
 
